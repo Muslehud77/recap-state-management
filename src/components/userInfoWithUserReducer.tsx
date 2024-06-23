@@ -1,43 +1,43 @@
 import React, { useReducer } from "react";
 //* user = {name : "xyz",age: 67, hobbies: ['hello']}
 
-
 const initialState = {
   name: "",
   age: "",
   hobbies: [],
 };
 
+const reducer = (currentState, action) => {
+  switch (action.type) {
+    case "addName":
+      return { ...currentState, name: action.payload };
 
-const reducer = (currentState, action)=>{
-
-    switch (action.type) {
-        case "addName":
-            
-            return {...currentState, name : "Hello"};
-    
-        default:
-            break;
-    }
-
-}
+    default:
+      break;
+  }
+};
 
 const UserInfoWithUserReducer = () => {
+  const [state, dispatch] = useReducer(reducer, initialState);
 
-
-    const [state,dispatch] = useReducer(reducer,initialState)
-
+  console.log(state);
 
   return (
     <div>
       <form className="flex flex-col justify-center items-center">
         <input
+          onChange={(e) =>
+            dispatch({ type: "addName", payload: e.target.value })
+          }
           className="border border-purple-300 m-5 p-2"
           type="text"
           name="name"
           placeholder="name"
         />
         <input
+          onChange={(e) =>
+            dispatch({ type: "addName", payload: e.target.value })
+          }
           className="border border-purple-300 m-5 p-2"
           type="number"
           name="age"
